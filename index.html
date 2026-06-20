@@ -1,1 +1,55 @@
-<title>ZYFreeGiftCards - Exchange</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZYFreeGiftCards - Exchange</title>
+    <style>
+        .box {
+            width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        input {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            margin: 15px 0;
+        }
+        button {
+            padding: 8px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Enter Discount Code</h2>
+        <input type="text" id="inputBox" placeholder="Enter discount code">
+        <br>
+        <button onclick="checkAndJump()">Confirm</button>
+    </div>
+
+    <script>
+        async function checkAndJump() {
+            const val = document.getElementById('inputBox').value.trim();
+            if (val === '') {
+                alert('Please enter discount code!');
+                return;
+            }
+            const targetUrl = `https://zyfreegiftcards.github.io/GiftCards/${val}.html`;
+            try {
+                const res = await fetch(targetUrl, { method: 'HEAD' });
+                if (res.ok) {
+                    window.location.href = targetUrl;
+                } else {
+                    alert('Discount not found, please enter the correct discount code!');
+                }
+            } catch (err) {
+                alert('Discount not found, please enter the correct discount code!');
+            }
+        }
+    </script>
+</body>
+</html>
